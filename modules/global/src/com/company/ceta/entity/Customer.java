@@ -3,13 +3,20 @@ package com.company.ceta.entity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
+
+import com.google.common.base.Joiner;
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.DeletePolicy;
+import com.haulmont.cuba.core.global.Messages;
+
 import java.util.Set;
 import javax.persistence.OneToMany;
 
+@NamePattern("#getCaption|firstName,name,type")
 @Table(name = "CETA_CUSTOMER")
 @Entity(name = "ceta$Customer")
 public class Customer extends StandardEntity {
@@ -64,4 +71,7 @@ public class Customer extends StandardEntity {
     }
 
 
+    public String getCaption() {
+        return Joiner.on(", ").skipNulls().join(name, firstName) + " (" + type + ")";
+    }
 }
