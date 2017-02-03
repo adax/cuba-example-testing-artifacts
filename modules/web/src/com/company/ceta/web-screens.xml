@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
-
     <include file="com/company/ceta/screens.xml"/>
-
+    <screen id="ceta$Customer.browse"
+            template="com/company/ceta/web/customer/customer-browse.xml"/>
+    <screen id="ceta$Customer.edit"
+            template="com/company/ceta/web/customer/customer-edit.xml"/>
+    <screen id="ceta$Order.edit"
+            template="com/company/ceta/web/order/order-edit.xml"/>
 </screen-config>

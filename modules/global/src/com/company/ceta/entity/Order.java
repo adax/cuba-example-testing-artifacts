@@ -10,7 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.chile.core.annotations.NamePattern;
 
+@NamePattern("%s|orderDate")
 @Table(name = "CETA_ORDER")
 @Entity(name = "ceta$Order")
 public class Order extends StandardEntity {
