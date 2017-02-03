@@ -128,6 +128,17 @@ configure(coreModule) {
         dbUser = 'sa'
         dbPassword = ''
     }
+
+//    task createTestDb(dependsOn: assemble, description: 'Creates local HSQLDB database for tests', type: CubaDbCreation) {
+//        dbms = 'hsql'
+//        host = 'localhost'
+//        dbName = 'ceta2'
+//        dbUser = 'sa'
+//        dbPassword = ''
+//    }
+
+
+    tasks.test.dependsOn(assembleDbScripts)
 }
 
 configure(guiModule) {
