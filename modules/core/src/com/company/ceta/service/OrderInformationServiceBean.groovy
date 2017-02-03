@@ -18,8 +18,6 @@ public class OrderInformationServiceBean implements OrderInformationService {
     Order findLatestOrder(Customer customer) {
 
         LoadContext.Query query = createCustomerQuery(customer)
-
-        println query
         LoadContext loadContext = createOrderLoadContext().setQuery(query)
 
         dataManager.load(loadContext)
