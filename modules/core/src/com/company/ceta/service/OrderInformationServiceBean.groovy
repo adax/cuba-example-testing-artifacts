@@ -17,15 +17,22 @@ public class OrderInformationServiceBean implements OrderInformationService {
     @Override
     Order findLatestOrder(Customer customer) {
 
-        def sqlQueryString = 'select e from ceta$Order e where e.customer.id = :customerId order by e.orderDate desc'
-        LoadContext loadContext = LoadContext.create(Order)
-                .setQuery(
-                    LoadContext.createQuery(sqlQueryString)
-                            .setParameter('customerId', customer.id)
-                            .setMaxResults(1)
-                )
+        LoadContext.Query query = createCustomerQuery(customer)
 
+        println query
+        LoadContext loadContext = createOrderLoadContext().setQuery(query)
 
         dataManager.load(loadContext)
+    }
+
+    protected LoadContext.Query createCustomerQuery(Customer customer) {
+        def sqlQueryString = 'select e from ceta$Order e where e.customer.id = :customerId order by e.orderDate desc'
+        LoadContext.createQuery(sqlQueryString)
+                .setParameter('customerId', customer.id)
+                .setMaxResults(1)
+    }
+
+    protected LoadContext<Order> createOrderLoadContext() {
+        LoadContext.create(Order)
     }
 }
