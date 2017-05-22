@@ -5,8 +5,9 @@ import com.company.ceta.entity.CustomerType
 import com.company.ceta.entity.Order
 import com.company.ceta.service.integration.base.EntityViewIntegrationSpec
 import com.haulmont.cuba.core.global.View
+import spock.lang.Unroll
 
-class CustomerIntegrationSpec extends EntityViewIntegrationSpec {
+class CustomerEntityViewIntegrationSpec extends EntityViewIntegrationSpec {
 
     Customer customer
 
@@ -36,24 +37,23 @@ class CustomerIntegrationSpec extends EntityViewIntegrationSpec {
     }
 
 
-    def "customer-view also includes the orders in a minimal form"() {
+    @Unroll
+    def "[View Checker]: #viewName contains attribute #attribute: #expectedIsLoaded"() {
 
         given:
-        def reloadedCustomer = reloadWithView(customer, 'customer-view')
+        def reloadedCustomer = reloadWithView(customer, viewName)
 
-        expect:
-        isLoaded(reloadedCustomer, 'orders', 'type')
+        when:
+        def actualIsLoaded = isLoaded(reloadedCustomer, attribute)
 
-    }
+        then:
+        expectedIsLoaded == actualIsLoaded
 
+        where:
+        viewName | attribute || expectedIsLoaded
+        View.LOCAL | 'orders' || false
+        'customer-view' | 'orders' || true
 
-    def "_local does not include the orders"() {
-
-        given:
-        def reloadedCustomer = reloadWithView(customer, View.LOCAL)
-
-        expect:
-        !isLoaded(reloadedCustomer, 'orders')
     }
 
 }
