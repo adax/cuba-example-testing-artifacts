@@ -14,7 +14,7 @@ import com.haulmont.cuba.core.global.AppBeans
 /**
  * Created by mario on 03.02.17.
  */
-class OrderInformationServiceBeanSpec extends ContainerIntegrationSpec {
+class OrderInformationServiceBeanIntegrationSpec extends ContainerIntegrationSpec {
 
     OrderInformationService service
 
@@ -45,16 +45,4 @@ class OrderInformationServiceBeanSpec extends ContainerIntegrationSpec {
         latestOrder == todaysOrder
     }
 
-
-    private void persist(Entity... entitiys) {
-
-        Transaction tx = container.persistence().createTransaction()
-
-        EntityManager entityManager = container.entityManager()
-        entitiys.each {
-            entityManager.persist(it);
-        }
-        tx.commit()
-
-    }
 }
