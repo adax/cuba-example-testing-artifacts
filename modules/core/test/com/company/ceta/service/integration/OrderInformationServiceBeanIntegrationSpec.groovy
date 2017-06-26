@@ -5,11 +5,7 @@ import com.company.ceta.entity.CustomerType
 import com.company.ceta.entity.Order
 import com.company.ceta.service.OrderInformationService
 import com.company.ceta.service.integration.container.ContainerIntegrationSpec
-import com.haulmont.cuba.core.EntityManager
-import com.haulmont.cuba.core.Transaction
-import com.haulmont.cuba.core.entity.Entity
 import com.haulmont.cuba.core.global.AppBeans
-
 
 /**
  * Created by mario on 03.02.17.
